@@ -679,10 +679,9 @@ document.addEventListener('DOMContentLoaded', initializePage);
             }
     
             touchEndX = event.touches[0].clientX;
-            let swipeDirection = (touchEndX - touchStartX)*10;
+            let swipeDirection = (touchEndX - touchStartX)*40;
     
             if (Math.abs(swipeDirection) > 20) {
-                // Adjust the sensitivity of the swipe
                 if (swipeDirection > 0) {
                     moveBasket({ key: 'ArrowRight' });
                 } else {
@@ -758,9 +757,10 @@ document.addEventListener('DOMContentLoaded', initializePage);
                 resetApple(apple1);
                 startGame();
               }
+              else{
+                showCongratulationsPopup();
+              }
               
-          }else{
-            showCongratulationsPopup();
           }
       }
   
