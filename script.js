@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', initializePage);
             }
     
             touchEndX = event.touches[0].clientX;
-            let swipeDirection = touchEndX - touchStartX;
+            let swipeDirection = (touchEndX - touchStartX)*2;
     
             if (Math.abs(swipeDirection) > 20) {
                 // Adjust the sensitivity of the swipe
