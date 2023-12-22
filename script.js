@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', initializePage);
             }
     
             touchEndX = event.touches[0].clientX;
-            let swipeDirection = (touchEndX - touchStartX)*40;
+            let swipeDirection = (touchEndX - touchStartX)*200;
     
             if (Math.abs(swipeDirection) > 20) {
                 if (swipeDirection > 0) {
@@ -757,11 +757,11 @@ document.addEventListener('DOMContentLoaded', initializePage);
                 resetApple(apple1);
                 startGame();
               }
-              else{
+              
+              
+          }else{
                 showCongratulationsPopup();
               }
-              
-          }
       }
   
       function resetApple(apple) {
