@@ -323,6 +323,7 @@ li {
         margin-bottom: 0.7rem;
     }
     .parent_div{
+        margin-top: 3rem;
         position: absolute;
         height: 60vh;
         width: 95vw;
@@ -332,6 +333,9 @@ li {
     } 
     .start-btn{
         bottom: 25%;
+    }
+    .score-box{
+        font-size: 1rem;
     }
 }
 /* Tablets */
