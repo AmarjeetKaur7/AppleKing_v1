@@ -636,6 +636,9 @@ document.addEventListener('DOMContentLoaded', initializePage);
   let appleFallInterval1;
   let isPopupOpen = false;
   let userScore=0;
+  let touchStartX;
+  let basketStartX;
+
   
   function gameplay() {
       document.getElementById('loadingpage').style.display = 'none';
@@ -670,28 +673,29 @@ document.addEventListener('DOMContentLoaded', initializePage);
       document.addEventListener('keydown', moveBasket);
 
     function handleTouchStart(event) {
-            touchStartX = event.touches[0].clientX;
-        }
-    
-        function handleTouchMove(event) {
-            if (!touchStartX) {
-                return;
-            }
-    
-            touchEndX = event.touches[0].clientX;
-            let swipeDirection = (touchEndX - touchStartX)*200;
-    
-            if (Math.abs(swipeDirection) > 20) {
-                if (swipeDirection > 0) {
-                    moveBasket({ key: 'ArrowRight' });
-                } else {
-                    moveBasket({ key: 'ArrowLeft' });
-                }
-    
-                touchStartX = null;
-            }
-        }
+        touchStartX = event.touches[0].clientX;
+        basketStartX = parseFloat(basket.style.left) || 0;
+    }
 
+    function handleTouchMove(event) {
+        e.preventDefault();
+        if (touchStartX !== undefined && basketStartX !== undefined) {
+            const touchX = event.touches[0].clientX;
+            const deltaX = touchX - touchStartX;
+            let newLeft = basketStartX + deltaX;
+
+            const windowWidth = window.innerWidth;
+            const basketWidth = basket.offsetWidth;
+
+            newLeft = Math.min(Math.max(newLeft, 0), windowWidth - basketWidth);
+            basket.style.left = newLeft + "px";
+        }
+    }
+
+    document.addEventListener("touchend", function (e) {
+        touchStartX = undefined;
+        basketStartX = undefined;
+    });
 
       
       function moveBasket(e) {
