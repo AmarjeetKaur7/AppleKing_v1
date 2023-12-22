@@ -653,6 +653,10 @@ document.addEventListener('DOMContentLoaded', initializePage);
       const appleSpeed = 2;
   
       let apple1 = document.getElementById('apple1');
+
+      document.addEventListener('keydown', moveBasket);
+      document.addEventListener('touchstart', handleTouchStart);
+      document.addEventListener('touchmove', handleTouchMove);
   
       resetApple(apple1);
   
@@ -664,6 +668,32 @@ document.addEventListener('DOMContentLoaded', initializePage);
       }, -10);
   
       document.addEventListener('keydown', moveBasket);
+
+    function handleTouchStart(event) {
+            touchStartX = event.touches[0].clientX;
+        }
+    
+        function handleTouchMove(event) {
+            if (!touchStartX) {
+                return;
+            }
+    
+            touchEndX = event.touches[0].clientX;
+            let swipeDirection = touchEndX - touchStartX;
+    
+            if (Math.abs(swipeDirection) > 20) {
+                // Adjust the sensitivity of the swipe
+                if (swipeDirection > 0) {
+                    moveBasket({ key: 'ArrowRight' });
+                } else {
+                    moveBasket({ key: 'ArrowLeft' });
+                }
+    
+                touchStartX = null;
+            }
+        }
+
+
       
       function moveBasket(e) {
           const deviceWidth = window.innerWidth;
